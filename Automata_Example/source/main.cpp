@@ -19,15 +19,22 @@ int main()
     } catch (const std::invalid_argument &e) {
         std::cerr << e.what() << std::endl;
     } 
+    string word;
+    std::cout << "Enter a word" << std::endl;
+    std::cin >> word;
     vector<string> strings = {"abab", "aaba"};
-    for (const string &x : strings) {
-        try {
-            int state = (*ends_with_b).Read(x);
-            std::cout << "Read " << x << " = " << state << std::endl;
-        } catch (const std::invalid_argument &e) {
-            std::cerr << e.what() << std::endl;
-            return 1;
+    try {
+        string accepted;
+        int state = (*ends_with_b).Read(word);
+        if (state==1) {
+            accepted = "accepted";
+        } else {
+            accepted = "not accepted";
         }
+        std::cout << word << " is " << accepted << "!" << std::endl;
+    } catch (const std::invalid_argument &e) {
+        std::cerr << e.what() << std::endl;
+        main();
     }
     return 0;
 }
