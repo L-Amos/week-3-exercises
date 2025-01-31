@@ -13,8 +13,16 @@ int main()
     map<char, int> A{{'a', 0}, {'b', 1}}; 
     vector<int> S{1};
     Automaton ends_with_b(A, M, S);
-    std::cout << "Read abab = " << ends_with_b.Read("abab") << std::endl;
-    std::cout << "Read aaba = " << ends_with_b.Read("aaba") << std::endl;
+    vector<string> strings = {"abab", "waba"};
+    for (const string &x : strings) {
+        try {
+            int state = ends_with_b.Read(x);
+            std::cout << "Read " << x << " = " << state << std::endl;
+        } catch (const std::invalid_argument &e) {
+            std::cerr << e.what() << std::endl;
+            return 0;
+        }
+    }
 
     return 0;
 }
