@@ -2,7 +2,11 @@
 #include <iostream>
 #include <stdexcept>
 
-Automaton::Automaton(map<char, int> A, vector<vector<int>> M, vector<int> S) : alphabet(A), transition_matrix(M), accepting_states(S) {}
+Automaton::Automaton(map<char, int> A, vector<vector<int>> M, vector<int> S) : alphabet(A), transition_matrix(M), accepting_states(S) {
+    if (alphabet.size() != transition_matrix[0].size() or transition_matrix.size() != 2) {  // Define the problem such that there are 2 possible states
+        throw std::invalid_argument("Transition matrix needs the same number of rows as letters in the alphabet, and the same number of columns as accepting states.");
+    }
+}
 
 bool Automaton::Read(string word)
 {
